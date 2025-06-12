@@ -10,20 +10,21 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-  - task: UseJava@1
-    inputs:
-      versionSpec: '17'
+
 
   - script: |
       sudo apt-get update
       sudo apt-get install -y libnss3 libatk-bridge2.0-0 libgtk-3-0 libxss1 libasound2 libgbm-dev
     displayName: 'Install Playwright dependencies'
 
-  - script: mvn install
+  - script: |
+     mvn install
     displayName: 'Maven Install'
 
-  - script: mvn exec:java -e -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install" || true
+  - script: |
+     mvn exec:java -e -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install" || true
     displayName: 'Install Playwright Browsers'
 
-  - script: mvn test
+  - script: |
+     mvn test
     displayName: 'Run Playwright Tests'
