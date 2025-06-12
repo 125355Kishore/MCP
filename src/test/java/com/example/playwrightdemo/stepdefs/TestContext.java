@@ -18,12 +18,8 @@ public class TestContext {
     public void initialize() {
         playwright = Playwright.create();
         // Always use headless mode in CI and by default
-        boolean headless = false;
-        String headlessEnv = System.getenv("HEADLESS");
-        if (headlessEnv != null) {
-            headless = Boolean.parseBoolean(headlessEnv);
-        }
-        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(headless));
+        // Force headless mode for all environments
+        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true));
         context = browser.newContext(new Browser.NewContextOptions().setViewportSize(null)); // Maximized
         page = context.newPage();
 
