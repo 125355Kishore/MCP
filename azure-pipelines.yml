@@ -8,5 +8,4 @@ steps:
 
   - script: mvn test
     displayName: 'Run Playwright Tests'
-    workingDirectory: 'playwright-demo'
 
