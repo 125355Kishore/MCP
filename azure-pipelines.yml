@@ -1,33 +1,15 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-  - main
+  - none
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: 'Default'
 
 steps:
-- script: |
-    sudo apt-get update
-    sudo apt-get install -y openjdk-17-jdk
-  displayName: 'Install OpenJDK 17'
+  - script: mvn install
+    displayName: 'Maven Install'
 
-- script: |
-    mvn install
-  displayName: 'Maven Install'
+  - script: mvn exec:java -e -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install" || true
+    displayName: 'Install Playwright Browsers'
 
-- script: |
-    mvn exec:java -e -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install" || true
-  displayName: 'Install Playwright Browsers'
-
-- script: |
-    sudo apt-get update
-    sudo apt-get install -y libnss3 libatk-bridge2.0-0 libgtk-3-0 libxss1 libasound2 libgbm-dev
-  displayName: 'Install Playwright dependencies'
-
-- script: |
-    mvn test
-  displayName: 'Run Playwright Tests'
+  - script: mvn test
+    displayName: 'Run Playwright Tests'
