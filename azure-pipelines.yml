@@ -2,14 +2,17 @@ trigger:
   - none
 
 pool:
-  name: 'Azure Pipelines'
+  name: 'Default'
 
 steps:
   - script: mvn install
     displayName: 'Maven Install'
+    workingDirectory: 'playwright-demo'
 
   - script: mvn exec:java -e -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install" || true
     displayName: 'Install Playwright Browsers'
+    workingDirectory: 'playwright-demo'
 
   - script: mvn test
     displayName: 'Run Playwright Tests'
+    workingDirectory: 'playwright-demo'
