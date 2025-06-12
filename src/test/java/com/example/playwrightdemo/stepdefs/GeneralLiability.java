@@ -104,7 +104,6 @@ public void userEntersValueInPolicyInfo() {
 
     @When("user clicks on Additional Coverages")
     public void userClicksOnAdditionalCoverages() {
-        // TODO: Define selectors.AdditionalCoverages and selectors.AddCoverage in Selectors.java
         testContext.page.click(selectors.AdditionalCoverages);
         testContext.page.click(selectors.AddCoverage);
         testContext.page.waitForTimeout(2000);
@@ -113,7 +112,6 @@ public void userEntersValueInPolicyInfo() {
 
     @When("user add select Category")
     public void userAddSelectCategory() {
-        // TODO: Define selectors.SelectCat, selectors.SearchGL, selectors.EmploymentCoverage, selectors.AddSelecedCoverages in Selectors.java
         testContext.page.click(selectors.SelectCat);
         testContext.page.waitForTimeout(500);
         testContext.page.selectOption(selectors.SelectCat, "EMPLOYMENT");
